@@ -1,0 +1,30 @@
+<ng-container *ngIf="!isLoading; else spinner">
+  <div class="container">
+    <h1>Search Term: {{query}}</h1>
+    <ng-container *ngIf="searchResults.length > 0; else noResults">
+      <div class="row p-3">
+        <div class="col">
+          <div class="search-results">
+            <div *ngFor="let item of searchResults" class="mb-3">
+              <app-search-item [item]="item"></app-search-item>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="loadNextSet()" *ngIf="!hideLoadMore">
+        <ng-container *ngIf="!isLoadMoreSpinner; else loadMoreSpinner">
+          <span>Load More</span>
+        </ng-container>
+        <ng-template #loadMoreSpinner>
+          <app-loading-spinner class="d-flex align-items-center justify-content-center"></app-loading-spinner>
+        </ng-template>
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #noResults>
+      <p class="text-center p-3">No results found.</p>
+    </ng-template>
+  </div>
+</ng-container>
+<ng-template #spinner>
+  <app-loading-spinner class="d-flex align-items-center justify-content-center vh-100"></app-loading-spinner>
+</ng-template>

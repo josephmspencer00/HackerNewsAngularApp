@@ -1,0 +1,9 @@
+<div class="card mb-3" *ngIf="item && item.url">
+  <div class="card-body">
+    <h5 class="card-title">{{ item.title }}</h5>
+    <p class="card-text">By: {{ item.by }}</p>
+    <p class="card-text">
+      <a href="{{item.url}}" target="_blank" class="card-link">{{ item.url }}</a>
+    </p>
+  </div>
+</div>

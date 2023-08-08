@@ -1,0 +1,43 @@
+<div class="container" #results>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="!isLoading; else spinner">
+        <div class="search-results" >
+          <ng-container *ngIf="searchResults.length > 0; else noResults">
+            <div *ngFor="let item of searchResults" class="mb-3">
+              <app-search-item [item]="item"></app-search-item>
+            </div>
+            <nav aria-label="Page navigation" class="d-flex justify-content-center">
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <ng-container *ngFor="let page of visiblePages">
+                  <li class="page-item" [class.active]="page === currentPage">
+                    <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                  </li>
+                </ng-container>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                    <span class="sr-only">Next</span>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </ng-container>
+          <ng-template #noResults>
+            <p class="text-center">No results found.</p>
+          </ng-template>
+        </div>
+      </ng-container>
+      <ng-template #spinner>
+        <app-loading-spinner class="d-flex align-items-center justify-content-center vh-100"></app-loading-spinner>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
