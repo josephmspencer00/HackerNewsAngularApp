@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { INewsItem } from '../../Abstractions/Interfaces/INewsitem';
-import { SearchService } from '../../Business/Services/search.service';
+import { ActivatedRoute } from '@angular/router';
+import { INewsItem } from '../../Abstractions/Interfaces';
+import { SearchServiceProvider } from '../search-results/search-service.provider'
 
 @Component({
   selector: 'app-query',
@@ -16,7 +16,7 @@ export class QueryComponent {
   isLoading: boolean = true;
   isLoadMoreSpinner: boolean = false;
 
-  constructor(private route: ActivatedRoute, private searchService: SearchService) { }
+  constructor(private route: ActivatedRoute, private searchService: SearchServiceProvider) { }
 
   ngOnInit(): void {
     // Get Search Term from query params, and load results

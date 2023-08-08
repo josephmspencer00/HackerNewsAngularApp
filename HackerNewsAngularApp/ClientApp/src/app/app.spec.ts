@@ -6,11 +6,12 @@ import { of } from 'rxjs';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { SearchServiceProvider } from './search-results/search-service.provider'
 
 describe('QueryComponent', () => {
   let component: QueryComponent;
   let fixture: ComponentFixture<QueryComponent>;
-  let searchServiceMock: jasmine.SpyObj<SearchService>;
+  let searchServiceMock: jasmine.SpyObj<SearchServiceProvider>;
 
   beforeEach(waitForAsync(() => {
     const searchServiceSpy = jasmine.createSpyObj('SearchService', ['searchItems']);
@@ -19,13 +20,13 @@ describe('QueryComponent', () => {
       declarations: [QueryComponent],
       providers: [
         { provide: ActivatedRoute, useValue: { queryParamMap: of({ get: () => 'searchTerm' }) } },
-        { provide: SearchService, useValue: searchServiceSpy },
+        { provide: SearchServiceProvider, useValue: searchServiceSpy },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(QueryComponent);
     component = fixture.componentInstance;
-    searchServiceMock = TestBed.inject(SearchService) as jasmine.SpyObj<SearchService>;
+    searchServiceMock = TestBed.inject(SearchServiceProvider) as jasmine.SpyObj<SearchServiceProvider>;
   }));
 
   it('should create', () => {
@@ -78,7 +79,7 @@ describe('SearchboxComponent', () => {
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
   let fixture: ComponentFixture<SearchResultsComponent>;
-  let searchServiceMock: jasmine.SpyObj<SearchService>;
+  let searchServiceMock: jasmine.SpyObj<SearchServiceProvider>;
 
   beforeEach(waitForAsync(() => {
     const searchServiceSpy = jasmine.createSpyObj('SearchService', ['getNewResultsByPage']);
@@ -88,13 +89,13 @@ describe('SearchResultsComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { paramMap: of({ get: () => '1' }) } },
         { provide: Router, useValue: {} },
-        { provide: SearchService, useValue: searchServiceSpy },
+        { provide: SearchServiceProvider, useValue: searchServiceSpy },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchResultsComponent);
     component = fixture.componentInstance;
-    searchServiceMock = TestBed.inject(SearchService) as jasmine.SpyObj<SearchService>;
+    searchServiceMock = TestBed.inject(SearchServiceProvider) as jasmine.SpyObj<SearchServiceProvider>;
   }));
 
   it('should create', () => {

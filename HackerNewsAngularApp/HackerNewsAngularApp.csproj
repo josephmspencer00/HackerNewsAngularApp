@@ -13,6 +13,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.19" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Moq" Version="4.18.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="xunit" Version="2.5.0" />
@@ -30,8 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\Abstractions\Interfaces\index.ts" />
     <None Remove="ClientApp\src\Abstractions\Interfaces\INewsitem.ts" />
+    <None Remove="ClientApp\src\Abstractions\Interfaces\ISearchService.ts" />
     <None Remove="ClientApp\src\app\app.spec.ts" />
+    <None Remove="ClientApp\src\app\search-results\search-service.provider.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +49,6 @@
     <TypeScriptCompile Include="ClientApp\src\Abstractions\Interfaces\INewsitem.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\app.spec.ts" />
 	<TypeScriptCompile Include="ClientApp\tsconfig.json" />
-
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

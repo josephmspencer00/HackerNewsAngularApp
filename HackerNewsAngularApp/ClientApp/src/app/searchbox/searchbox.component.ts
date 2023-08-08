@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { INewsItem } from '../../Abstractions/Interfaces/INewsitem';
-import { SearchService } from '../../Business/Services/search.service';
+import { INewsItem } from '../../Abstractions/Interfaces';
 
 @Component({
   selector: 'app-searchbox',

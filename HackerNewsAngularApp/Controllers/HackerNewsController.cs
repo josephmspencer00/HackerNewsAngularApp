@@ -19,7 +19,14 @@ namespace HackerNewsAngularApp.Controllers
         {
             // Retrieve and return new story IDs from the service
             var ids = await _hackerNewsService.GetNewStoriesIds();
-            return Ok(ids);
+            if (ids != null)
+            {
+                return Ok(ids);
+            } else
+            {
+                return StatusCode(500, $"An error occurred: IDs were null");
+            }
+            
         }
 
         [HttpGet]

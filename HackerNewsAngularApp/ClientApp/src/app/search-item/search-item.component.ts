@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { INewsItem } from '../../Abstractions/Interfaces/INewsitem';
+import { INewsItem } from '../../Abstractions/Interfaces';
 
 @Component({
   selector: 'app-search-item',

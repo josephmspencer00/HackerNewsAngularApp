@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { INewsItem } from '../../Abstractions/Interfaces/INewsitem';
-import { SearchService } from '../../Business/Services/search.service';
+import { INewsItem } from '../../Abstractions/Interfaces';
+import { SearchServiceProvider } from '../search-results/search-service.provider'
 
 @Component({
   selector: 'app-search-results',
@@ -18,7 +18,7 @@ export class SearchResultsComponent implements OnInit {
 
   @Output() scrollToTopEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private searchService: SearchService, private route: ActivatedRoute,
+  constructor(private searchService: SearchServiceProvider, private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class SearchResultsComponent implements OnInit {
 
   // Get new results on page load
   getNewResults(): void {
-      this.searchService.getNewResults().subscribe((results) => {
+      this.searchService.getNewResults().subscribe((results: INewsItem[]) => {
         this.searchResults = results;
         this.isLoading = false;
       });

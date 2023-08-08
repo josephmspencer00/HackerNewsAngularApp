@@ -1,12 +1,12 @@
 import { SearchService } from './search.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { INewsItem } from '../../Abstractions/Interfaces/INewsitem';
+import { INewsItem, ISearchService } from '../../Abstractions/Interfaces';
 import { RouterTestingModule } from "@angular/router/testing";
 import { of } from 'rxjs';
 
 describe('SearchService', () => {
-  let service: SearchService;
+  let service: ISearchService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {

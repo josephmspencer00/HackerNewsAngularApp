@@ -46,9 +46,12 @@ namespace HackerNewsAngularApp.Services
                     {
                         var content = await response.Content.ReadAsStringAsync();
                         var item = Newtonsoft.Json.JsonConvert.DeserializeObject<NewsItem>(content);
-                        items.Add(item);
-                        // Add to cache
-                        _memoryCache.Set(id.ToString(), item, TimeSpan.FromMinutes(10));
+                        if (item != null)
+                        {
+                            items.Add(item);
+                            // Add to cache
+                            _memoryCache.Set(id.ToString(), item, TimeSpan.FromMinutes(10));
+                        }    
                     }
                 }
 
